@@ -1,7 +1,7 @@
 import {ProductsContext} from './ProductsContext';
-import React, {useState, ReactNode, useContext} from 'react';
+import {useState, useContext, ReactNode} from 'react';
 
-interface Props {
+interface IProducts {
   code: string,
   category: string,
   name_product: string,
@@ -9,8 +9,12 @@ interface Props {
   price: string,
 }
 
-export const ProductsProvider = ({children}: ReactNode) => {
-  const [product, setProduct] = useState<Props[]>([]);
+interface Props {
+  children: ReactNode,
+}
+
+export const ProductsProvider = ({children}: Props) => {
+  const [product, setProduct] = useState<IProducts[]>([]);
   const data = {
     product,
     setProduct
