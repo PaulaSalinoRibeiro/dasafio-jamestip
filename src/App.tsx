@@ -1,9 +1,11 @@
 import React from 'react';
+import {ProductsProvider} from './context/ProductsProvider'
 
 function App() {
   return (
-    <div>
-    </div>
+    <ProductsProvider>
+
+    </ProductsProvider>
   );
 }
 

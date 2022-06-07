@@ -1,4 +1,4 @@
-import {ProductsContext} from './ProdutcsContext';
+import {ProductsContext} from './ProductsContext';
 import React, {useState, ReactNode, useContext} from 'react';
 
 interface Props {
