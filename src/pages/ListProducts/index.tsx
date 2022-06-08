@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { CardProduct } from '../../components/CardProduct';
 import { Header } from "../../components/Header"
+import { useProducts } from '../../context/ProductsProvider';
 import { Container } from './styles';
 
 interface Item {
@@ -12,6 +13,7 @@ interface Item {
 }
 
 export const ListProducts = () => {
+  const {product} = useProducts();
   const keyLocalStorage = '@jamesTip:registrations';
   
   const [existProduct, setExistProduct] = useState(false);
@@ -24,7 +26,9 @@ export const ListProducts = () => {
       setList(producstList);
       setExistProduct(true);
     } 
-  }, [])
+  }, []);
+
+  useEffect(() => setList(product), [product]);
 
   useEffect(() => {
     if(list.length === 0) {
