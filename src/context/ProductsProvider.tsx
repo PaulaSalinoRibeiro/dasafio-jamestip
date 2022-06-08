@@ -13,6 +13,10 @@ interface IDataProps {
   product: IProducts[];
   setProduct: (value: IProducts[]) => void;
   existProduct: boolean;
+  isModalEdit: boolean;
+  setIsModalEdit: (value: boolean) => void;
+  productEdit: IProducts;
+  setProductEdit: (value: IProducts) => void;
 }
 
 interface Props {
@@ -24,6 +28,8 @@ export const ProductsContext = createContext<IDataProps>({} as IDataProps);
 export const ProductsProvider = ({children}: Props) => {
   const [product, setProduct] = useState<IProducts[]>([]);
   const [existProduct, setExistProduct] = useState(false);
+  const [isModalEdit, setIsModalEdit] = useState(false);
+  const [productEdit, setProductEdit] = useState<IProducts>({} as IProducts);
 
   const keyLocalStorage = '@jamesTip:registrations';
 
@@ -45,7 +51,12 @@ export const ProductsProvider = ({children}: Props) => {
   const data: IDataProps = {
     product,
     setProduct,
-    existProduct
+    existProduct,
+    isModalEdit,
+    setIsModalEdit,
+    productEdit,
+    setProductEdit
+
   }
 
   return (

@@ -1,4 +1,3 @@
-
 interface Props {
   code: string;
   category: string;
@@ -8,14 +7,6 @@ interface Props {
 }
 
  const keyLocalStorage = '@jamesTip:registrations';
-
-// export const addLocalStorage = (item: Props) => {
-//   const localStorageExist = localStorage.getItem(keyLocalStorage);
-//   if(localStorageExist) {
-//     const productsSaved = JSON.parse(localStorageExist);
-//     localStorage.setItem(keyLocalStorage, JSON.stringify([...productsSaved, item]));
-//   } 
-// }
 
 export const deleteLocalStorage = (code: string) => {
   const productsSaved = localStorage.getItem(keyLocalStorage);

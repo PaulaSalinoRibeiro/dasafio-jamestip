@@ -1,4 +1,3 @@
-
 import { useProducts } from '../../context/ProductsProvider'
 import { deleteLocalStorage } from '../../utils/localStorage';
 import {Container, Buttons} from './styles'
@@ -15,9 +14,13 @@ export const CardProduct = ({
   code, category, name_product, name_provider, price
 } : Props) => {
   
-  const {product, setProduct} = useProducts();
+  const {product, setProduct ,setIsModalEdit, setProductEdit} = useProducts();
 
-  const handleEditItem = () => {}
+  const handleEditItem = (code: string) => {
+    setIsModalEdit(true);
+    const productEdit = product.find(item => item.code === code);
+    setProductEdit(productEdit!)
+  }
 
   const handleRemoveItem = (code: string) => {
     const newProductList = product.filter(item => item.code !== code);
@@ -46,7 +49,7 @@ export const CardProduct = ({
         </button>
         <button
           type="button"
-          onClick={handleEditItem}
+          onClick={() => handleEditItem(code)}
         >
           Editar
         </button>

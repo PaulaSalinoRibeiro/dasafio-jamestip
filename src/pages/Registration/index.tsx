@@ -104,7 +104,7 @@ export const Registration = () => {
             Preço:
             <input 
               id="price" 
-              placeholder="Ex: 999,99"
+              placeholder="Ex: 999.99"
               type="text" 
               name="price" 
               value={info.price} 
