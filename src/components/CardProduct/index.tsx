@@ -1,5 +1,6 @@
 
 import { useProducts } from '../../context/ProductsProvider'
+import { deleteLocalStorage } from '../../utils/localStorage';
 import {Container, Buttons} from './styles'
 
 interface Props {
@@ -21,6 +22,7 @@ export const CardProduct = ({
   const handleRemoveItem = (code: string) => {
     const newProductList = product.filter(item => item.code !== code);
     setProduct(newProductList);
+    deleteLocalStorage(code);
   }
   
   return (

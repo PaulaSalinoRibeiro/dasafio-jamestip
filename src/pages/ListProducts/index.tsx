@@ -1,42 +1,10 @@
-import {useEffect, useState} from 'react';
 import { CardProduct } from '../../components/CardProduct';
 import { Header } from "../../components/Header"
 import { useProducts } from '../../context/ProductsProvider';
 import { Container } from './styles';
 
-interface Item {
-  code: string,
-  category: string,
-  name_product: string,
-  name_provider: string,
-  price: string,
-}
-
 export const ListProducts = () => {
-  const {product} = useProducts();
-  const keyLocalStorage = '@jamesTip:registrations';
-  
-  const [existProduct, setExistProduct] = useState(false);
-  const [list, setList] = useState<Item[]>([]);
-  
-  useEffect(() => {
-    const products = localStorage.getItem(keyLocalStorage);
-    if (products) {
-      const producstList = JSON.parse(products);
-      setList(producstList);
-      setExistProduct(true);
-    } 
-  }, []);
-
-  useEffect(() => setList(product), [product]);
-
-  useEffect(() => {
-    if(list.length === 0) {
-      setExistProduct(false)
-    } else {
-      setExistProduct(true)
-    }
-  }, [list])
+  const {product, existProduct} = useProducts();
 
   return (
     <>
@@ -44,7 +12,7 @@ export const ListProducts = () => {
       <Container>
       {
         existProduct
-        ? list.map(item => (
+        ? product.map(item => (
             <CardProduct 
               key={item.code} 
               code={item.code} 

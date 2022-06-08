@@ -12,6 +12,7 @@ interface IProducts {
 interface IDataProps {
   product: IProducts[];
   setProduct: (value: IProducts[]) => void;
+  existProduct: boolean;
 }
 
 interface Props {
@@ -22,14 +23,29 @@ export const ProductsContext = createContext<IDataProps>({} as IDataProps);
 
 export const ProductsProvider = ({children}: Props) => {
   const [product, setProduct] = useState<IProducts[]>([]);
+  const [existProduct, setExistProduct] = useState(false);
 
   const keyLocalStorage = '@jamesTip:registrations';
-  
-  useEffect(() => localStorage.setItem(keyLocalStorage, JSON.stringify(product)), [product])
+
+  useEffect(() => {
+    const productsSaved = localStorage.getItem(keyLocalStorage);
+    if(productsSaved) {
+      setProduct(JSON.parse(productsSaved));
+    }
+  }, [])
+
+  useEffect(() => {
+    if(product?.length !== 0) {
+      setExistProduct(true);
+    } else {
+      setExistProduct(false);
+    }
+  }, [product]);
 
   const data: IDataProps = {
     product,
-    setProduct
+    setProduct,
+    existProduct
   }
 
   return (

@@ -18,16 +18,19 @@ export const Registration = () => {
   const [info, setInfo] = useState<Props>(
     {code: '', category: '', name_product: '', name_provider: '', price: ''}
   );
-  
+
+  const keyLocalStorage = '@jamesTip:registrations';
+
   const handleSubmit = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     event.preventDefault();
     
-    const alreadyExistRegister = product.some(item => item.code === info.code);
+    const alreadyExistRegister = product?.some(item => item.code === info.code);
 
     if (alreadyExistRegister) {
       global.alert('Já existe um produto com o código cadastrado!')
     } else {
       setProduct([...product, info]);
+      localStorage.setItem(keyLocalStorage, JSON.stringify([...product, info]));
       setInfo({code: '', category: '', name_product: '', name_provider: '', price: ''});
       setdisabled(true);
     }
