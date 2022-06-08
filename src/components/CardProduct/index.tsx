@@ -36,7 +36,7 @@ export const CardProduct = ({
       <span>Fornecedor:</span>
       <p>{name_provider}</p>
       <span>Preço</span>
-      <p>{price}</p>
+      <p>{Number(price).toLocaleString('pt-Br', {style: 'currency', currency: 'BRL'})}</p>
       <Buttons>
         <button
           type="button"
