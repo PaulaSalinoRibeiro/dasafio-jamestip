@@ -23,7 +23,9 @@ export const ProductsContext = createContext<IDataProps>({} as IDataProps);
 export const ProductsProvider = ({children}: Props) => {
   const [product, setProduct] = useState<IProducts[]>([]);
 
-  useEffect(() => console.log(product), [product])
+  const keyLocalStorage = '@jamesTip:registrations';
+  
+  useEffect(() => localStorage.setItem(keyLocalStorage, JSON.stringify(product)), [product])
 
   const data: IDataProps = {
     product,

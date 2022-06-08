@@ -36,6 +36,10 @@ export const Container = styled.div`
       margin-top: 24px;
       padding: 6px;
       width: 30%;
+
+      &:disabled {
+        background-color: ${({theme}) => theme.colors.secondary_light}; 
+      }
     }
   }
   

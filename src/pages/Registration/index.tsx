@@ -14,17 +14,38 @@ interface Props {
 
 export const Registration = () => {
   const {product, setProduct} = useProducts();
+  const [disabled, setdisabled] = useState(true);
   const [info, setInfo] = useState<Props>(
     {code: '', category: '', name_product: '', name_provider: '', price: ''}
   );
   
   const handleSubmit = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     event.preventDefault();
-    setProduct([...product, info]);
+    
+    const alreadyExistRegister = product.some(item => item.code === info.code);
+
+    if (alreadyExistRegister) {
+      global.alert('Já existe um produto com o código cadastrado!')
+    } else {
+      setProduct([...product, info]);
+      setInfo({code: '', category: '', name_product: '', name_provider: '', price: ''});
+      setdisabled(true);
+    }
   }
 
   const handleChange = ({target: {name, value}}: ChangeEvent<HTMLInputElement>) => {
+    const {code, category, name_product, name_provider, price} = info;
+
     setInfo((prev) => ({...prev, [name]:value}));
+    
+    if (code.length !== 0 
+      && category.length !== 0 
+      && name_product.length !== 0
+      && name_product.length !== 0
+      && name_provider.length !== 0 
+      && price.length !== 0) {
+      setdisabled(false);
+    } 
   }
 
   return (
@@ -35,7 +56,8 @@ export const Registration = () => {
           <label htmlFor="code">
             Código do produto:
             <input 
-              id="code" 
+              id="code"
+              placeholder="Ex: CD999"
               type="text" 
               name="code" 
               value={info.code} 
@@ -46,6 +68,7 @@ export const Registration = () => {
             Categoria do produto:
             <input 
               id="category" 
+              placeholder="Ex: Eletrônico"
               type="text" 
               name="category" 
               value={info.category} 
@@ -55,7 +78,8 @@ export const Registration = () => {
           <label htmlFor="name_product">
             Nome do produto:
             <input 
-              id="name_product" 
+              id="name_product"
+              placeholder="Ex: Produto"
               type="text" 
               name="name_product" 
               value={info.name_product} 
@@ -65,7 +89,8 @@ export const Registration = () => {
           <label htmlFor="name_provider">
             Nome do fornecedor:
             <input 
-              id="name_provider" 
+              id="name_provider"
+              placeholder="Ex: Fornecedor" 
               type="text" 
               name="name_provider" 
               value={info.name_provider} 
@@ -76,6 +101,7 @@ export const Registration = () => {
             Preço:
             <input 
               id="price" 
+              placeholder="Ex: 999,99"
               type="text" 
               name="price" 
               value={info.price} 
@@ -84,6 +110,7 @@ export const Registration = () => {
           </label>
           <button
             type="submit"
+            disabled={disabled}
             onClick={handleSubmit}
           >
             Enviar
