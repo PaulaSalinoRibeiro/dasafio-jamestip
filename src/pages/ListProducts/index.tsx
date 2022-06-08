@@ -1,5 +1,9 @@
+import { Header } from "../../components/Header"
+
 export const ListProducts = () => {
   return (
-    <h1>List Products page</h1>
+    <>
+      <Header/>
+    </>
   )
 }

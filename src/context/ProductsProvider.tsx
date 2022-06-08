@@ -1,21 +1,31 @@
-import {ProductsContext} from './ProductsContext';
-import {useState, useContext, ReactNode} from 'react';
+import { createContext } from "react";
+import {useState, ReactNode, useContext, useEffect} from 'react';
 
 interface IProducts {
-  code: string,
-  category: string,
-  name_product: string,
-  name_provider: string,
-  price: string,
+  code: string;
+  category: string;
+  name_product: string;
+  name_provider: string;
+  price: string;
+}
+
+interface IDataProps {
+  product: IProducts[];
+  setProduct: (value: IProducts[]) => void;
 }
 
 interface Props {
-  children: ReactNode,
+  children: ReactNode;
 }
+
+export const ProductsContext = createContext<IDataProps>({} as IDataProps);
 
 export const ProductsProvider = ({children}: Props) => {
   const [product, setProduct] = useState<IProducts[]>([]);
-  const data = {
+
+  useEffect(() => console.log(product), [product])
+
+  const data: IDataProps = {
     product,
     setProduct
   }
