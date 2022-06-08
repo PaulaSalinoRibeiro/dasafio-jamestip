@@ -15,7 +15,7 @@ export const Container = styled.div`
       text-decoration: none;
       color: ${({theme}) => theme.colors.shape};
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 `;

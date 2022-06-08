@@ -1,6 +1,7 @@
 import {useState, ChangeEvent, MouseEvent } from 'react';
 import { useProducts } from '../../context/ProductsProvider';
 import { Header } from '../../components/Header';
+
 import {Container} from './styles'
 
 interface Props {

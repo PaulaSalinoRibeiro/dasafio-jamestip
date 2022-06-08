@@ -21,7 +21,7 @@ export const theme: DefaultTheme = {
     attention: '#E83F5B',
     attention_light: 'rgba(232, 63, 91, 0.5)',
     shape: '#FFFFFF',
-    title: '#363F5F',
+    shadow: 'rgba(0, 0, 0, 0.1)',
     text: '#969CB2',
     text_dark: '#000000',
   }
