@@ -1,6 +1,6 @@
 
 import { useProducts } from '../../context/ProductsProvider'
-import {Container} from './styles'
+import {Container, Buttons} from './styles'
 
 interface Props {
   code: string,
@@ -25,23 +25,30 @@ export const CardProduct = ({
   
   return (
     <Container key={code}>
-      <p>{`Código: ${code}`}</p>
-      <p>{`Categoria: ${category}`}</p>
-      <p>{`Nome: ${name_product}`}</p>
-      <p>{`Fornecedor: ${name_provider}`}</p>
-      <p>{`Preço: ${price}`}</p>
-      <button
-        type="button"
-        onClick={() => handleRemoveItem(code)}
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        onClick={handleEditItem}
-      >
-        Edit
-      </button>
+      <span>Código:</span>
+      <p>{code}</p>
+      <span>Categoria:</span>
+      <p>{category}</p>
+      <span>Nome:</span>
+      <p>{name_product}</p>
+      <span>Fornecedor:</span>
+      <p>{name_provider}</p>
+      <span>Preço</span>
+      <p>{price}</p>
+      <Buttons>
+        <button
+          type="button"
+          onClick={() => handleRemoveItem(code)}
+        >
+          Remover
+        </button>
+        <button
+          type="button"
+          onClick={handleEditItem}
+        >
+          Editar
+        </button>
+      </Buttons>
     </Container>
   )
 }
