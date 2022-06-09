@@ -1,13 +1,35 @@
-
+import {ChangeEvent, MouseEvent} from 'react';
 import { useProducts } from '../../context/ProductsProvider'
+
 import {Container} from './styles'
 
-export const ProductEdit = () => {
-  const {setIsModalEdit, productEdit} = useProducts();
+interface IProducts {
+  code: string;
+  category: string;
+  name_product: string;
+  name_provider: string;
+  price: string;
+}
 
-  const handleClick = () => {
-    setIsModalEdit(false)
+export const ProductEdit = () => {
+  const {setIsModalEdit, productEdit, setProductEdit, product} = useProducts();
+
+  const handleChange = ({target: {name, value}}: ChangeEvent<HTMLInputElement>) => {
+    setProductEdit({...productEdit, [name]: value});
   }
+
+  const handleSubmit = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    event.preventDefault();
+    product
+    .forEach(item => {
+      if (item.code === productEdit.code) {
+         Object.assign(item, productEdit)
+      }
+    });
+    setIsModalEdit(false);
+
+  }
+
   return (
     <>
       <Container>
@@ -18,9 +40,10 @@ export const ProductEdit = () => {
             <input 
               id="code"
               type="text" 
-              name="code" 
+              name="code"
+              disabled
+              onChange={handleChange}
               value={productEdit.code} 
-              // onChange={}
             />
           </label>
           <label htmlFor="category">
@@ -29,8 +52,8 @@ export const ProductEdit = () => {
               id="category" 
               type="text" 
               name="category" 
+              onChange={handleChange} 
               value={productEdit.category} 
-              // onChange={} 
             />
           </label>
           <label htmlFor="name_product">
@@ -39,8 +62,8 @@ export const ProductEdit = () => {
               id="name_product"
               type="text" 
               name="name_product" 
+              onChange={handleChange} 
               value={productEdit.name_product} 
-              // onChange={} 
             />
           </label>
           <label htmlFor="name_provider">
@@ -49,8 +72,8 @@ export const ProductEdit = () => {
               id="name_provider" 
               type="text" 
               name="name_provider" 
+              onChange={handleChange} 
               value={productEdit.name_provider} 
-              // onChange={} 
             />
           </label>
           <label htmlFor="price">
@@ -59,15 +82,15 @@ export const ProductEdit = () => {
               id="price" 
               type="text" 
               name="price" 
+              onChange={handleChange} 
               value={productEdit.price} 
-              // onChange={} 
             />
           </label>
           <button
             type="submit"
-            // onClick={}
+            onClick={handleSubmit}
           >
-            Enviar
+            Salvar
           </button>
         </form>
       </Container>
