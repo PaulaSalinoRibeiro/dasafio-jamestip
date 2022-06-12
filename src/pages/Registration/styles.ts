@@ -18,7 +18,7 @@ export const Container = styled.div`
       padding: 12px;
 
       &:hover {
-        border: 1px solid ${({theme}) => theme.colors.primary};
+        box-shadow: 1px 1px 10px -4px ${({theme}) => theme.colors.primary};
       }
 
       input {

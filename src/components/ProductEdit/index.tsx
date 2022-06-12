@@ -3,16 +3,9 @@ import { useProducts } from '../../context/ProductsProvider'
 
 import {Container} from './styles'
 
-interface IProducts {
-  code: string;
-  category: string;
-  name_product: string;
-  name_provider: string;
-  price: string;
-}
-
 export const ProductEdit = () => {
   const {setIsModalEdit, productEdit, setProductEdit, product} = useProducts();
+  const keyLocalStorage = '@jamesTip:registrations';
 
   const handleChange = ({target: {name, value}}: ChangeEvent<HTMLInputElement>) => {
     setProductEdit({...productEdit, [name]: value});
@@ -28,6 +21,7 @@ export const ProductEdit = () => {
     });
     setIsModalEdit(false);
 
+    localStorage.setItem(keyLocalStorage, JSON.stringify(product));
   }
 
   return (

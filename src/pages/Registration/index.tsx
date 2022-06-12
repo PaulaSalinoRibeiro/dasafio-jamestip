@@ -26,6 +26,10 @@ export const Registration = () => {
     
     const alreadyExistRegister = product?.some(item => item.code === info.code);
 
+    /**
+     * O código é um identificador único
+     */
+
     if (alreadyExistRegister) {
       global.alert('Já existe um produto com o código cadastrado!')
     } else {
@@ -40,13 +44,17 @@ export const Registration = () => {
     const {code, category, name_product, name_provider, price} = info;
 
     setInfo((prev) => ({...prev, [name]:value}));
+
+    /**
+     * O preencimento de todos os campos são obrigatórios
+     */
     
-    if (code.length !== 0 
-      && category.length !== 0 
-      && name_product.length !== 0
-      && name_product.length !== 0
-      && name_provider.length !== 0 
-      && price.length !== 0) {
+    if (!code
+      && !category 
+      && !name_product
+      && !name_product
+      && !name_provider
+      && !price) {
       setdisabled(false);
     } 
   }

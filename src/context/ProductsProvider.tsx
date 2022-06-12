@@ -1,5 +1,4 @@
-import { createContext } from "react";
-import {useState, ReactNode, useContext, useEffect} from 'react';
+import {useState, ReactNode, useContext, useEffect, createContext, useMemo} from 'react';
 
 interface IProducts {
   code: string;
@@ -11,12 +10,12 @@ interface IProducts {
 
 interface IDataProps {
   product: IProducts[];
-  setProduct: (value: IProducts[]) => void;
+  setProduct(value: IProducts[]): void;
   existProduct: boolean;
   isModalEdit: boolean;
-  setIsModalEdit: (value: boolean) => void;
+  setIsModalEdit(value: boolean): void;
   productEdit: IProducts;
-  setProductEdit: (value: IProducts) => void;
+  setProductEdit(value: IProducts): void;
 }
 
 interface Props {
@@ -48,16 +47,17 @@ export const ProductsProvider = ({children}: Props) => {
     }
   }, [product]);
 
-  const data: IDataProps = {
-    product,
-    setProduct,
-    existProduct,
-    isModalEdit,
-    setIsModalEdit,
-    productEdit,
-    setProductEdit
-
-  }
+  const data: IDataProps = useMemo(() => (
+    {
+      product,
+      setProduct,
+      existProduct,
+      isModalEdit,
+      setIsModalEdit,
+      productEdit,
+      setProductEdit
+    }
+  ), [product, existProduct, isModalEdit, productEdit]);
 
   return (
     <ProductsContext.Provider value={data}>
